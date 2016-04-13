@@ -1,14 +1,15 @@
+import sys
 from random import choice
 
 
-def open_and_read_file(file_path):
+def open_and_read_file(file_path1):
     """Takes file path as string; returns text as string.
 
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
     
-    contents = open(file_path).read()
+    contents = open(file_path1).read()
     return contents 
     "This should be a variable that contains your file text as one long string"
 
@@ -84,13 +85,29 @@ def make_text(chains , last_words):
     return text
 
 
-input_path = "gettysburg.txt"
+
+filename1 = sys.argv[1]
+
+filename2 = sys.argv[2]
+
+contents1 = open_and_read_file(filename1)
+contents2 = open_and_read_file(filename2)
+
+mixed_string = contents1 + " " + contents2
+
+
+
+
+# declare a new variable to hold the text from both files
+# call open_and_read_file for both filename
+# open_and_read_file(input_path)
+# add those big strings both to var, with a space
+# var = filename1 , filename2
 
 # Open the file and turn it into one long string
-input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains , last_words = make_chains(input_text)
+chains , last_words = make_chains(mixed_string)
 #print chains 
 
 
