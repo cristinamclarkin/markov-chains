@@ -7,14 +7,10 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-
-    # your code goes here
+    
     contents = open(file_path).read()
-    #print contents
     return contents 
     "This should be a variable that contains your file text as one long string"
-
-
 
 def make_chains(text_string):
     """Takes input text as string; returns _dictionary_ of markov chains.
@@ -34,23 +30,24 @@ def make_chains(text_string):
     list_of_words = text_string.split()
     # terminates loop at second to last word so that there is no index error
     for i in range(len(list_of_words) - 2):
-        # setting string values index that will be used to form the key name in our tuple
-        # begins at first word in our string
+        # setting string values index that will be used to form the key     
+        # in our tuple, begins at first word in our string
         word1 = list_of_words[i]
         # moves through string in increments of one
         word2 = list_of_words[i +1]
-        # creates key variable name using two strings
+        # creates our key which is two strings inside of a tuple
         my_key = (word1, word2)
-        # creates varaiable for third word that will be added to a list 
-        # that acts as our value for keys
+        # assigns key value to third word that will be added to a list 
         word3 = list_of_words[i + 2]
-        # if our value is not in chains (our dictionary), add value to list 
-        if my_key in chains:
-            chains[my_key].append(word3)
-        # if it is not, assign word (value) to key (tuple) 
-        else: 
+        # if my_key is already in chains then add word_3 to the list
+        # of key values. Otherwise, create a new key value.
+        if my_key not in chains:
             chains[my_key] = [word3]
-
+            
+        else: 
+            chains[my_key].append(word3)
+            # returns the list of words as a tuple and terminates at the last
+            # in chains
     return chains , tuple(list_of_words[-2:])
 
 
@@ -63,7 +60,7 @@ def make_text(chains , last_words):
     
     # creates an string into which we will put our random keys and 
     # values in
-    text = ""
+    text = my_key[0] + " " + my_key[1]
     
     # while item is in our dictionary
     while True:
@@ -87,7 +84,7 @@ def make_text(chains , last_words):
     return text
 
 
-input_path = "green-eggs.txt"
+input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
