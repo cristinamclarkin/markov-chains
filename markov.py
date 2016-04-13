@@ -51,15 +51,36 @@ def make_chains(text_string):
         else: 
             chains[my_key] = [word3]
 
-    return chains
+    return chains , tuple(list_of_words[-2:])
 
 
 
 
-def make_text(chains):
+def make_text(chains , last_words):
     """Takes dictionary of markov chains; returns random text."""
-
+    # randomly selects keys from our dictionary
+    my_key = choice(chains.keys())
+    
+    # creates an string into which we will put our random keys and 
+    # values in
     text = ""
+    
+    # while item is in our dictionary
+    while True:
+        
+        # randomly selects key value 
+        next_word = choice(chains[my_key])
+        
+        # concatenates randomly selected words
+        text = text + " " + next_word
+
+        # creates new tuple pair from the list of values 
+        my_key = (my_key[1], next_word)
+
+        # references previously established parameter so that loop
+        # is broken once all tuple options are exausted 
+        if my_key == last_words:
+            break
 
     # your code goes here
 
@@ -72,9 +93,11 @@ input_path = "green-eggs.txt"
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains = make_chains(input_text)
-print chains 
+chains , last_words = make_chains(input_text)
+#print chains 
+
+
 # Produce random text
-random_text = make_text(chains)
+random_text = make_text(chains, last_words)
 
 print random_text
