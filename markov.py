@@ -85,14 +85,15 @@ def make_text(chains , last_words):
     return text
 
 
-
+# assigned first text passed to var
 filename1 = sys.argv[1]
-
+# " "
 filename2 = sys.argv[2]
-
+# calls each file and turns them into strings
 contents1 = open_and_read_file(filename1)
 contents2 = open_and_read_file(filename2)
 
+# concatenating the two large strings 
 mixed_string = contents1 + " " + contents2
 
 
